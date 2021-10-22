@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>com.tfm.webapi.gesparcbackend</groupId>
+  <artifactId>gesparcbackend-parent</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>GesparcBackend</name>
+  <description>Application qui permet de gérer les véhicules de manière automatisé via une API web</description>
+  
+  <properties>
+    <java.version>1.8</java.version>
+    <maven.version>3.5.0</maven.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <spring.artifact.version>2.5.1</spring.artifact.version> 
+  </properties>
+  
+  <scm>
+    <connection></connection>
+    <developerConnection></developerConnection>
+    <url></url>
+    <tag></tag>
+  </scm>
+  
+  <build>
+    <pluginManagement>
+      <plugins>
+        
+        <!-- maven plugins par defaut () debut -->
+        <plugin></plugin>
+      
+      
+      
+      </plugins>
+    </pluginManagement>
+  
+  
+  </build>
+
+
+</project>
