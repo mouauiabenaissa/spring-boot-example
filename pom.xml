@@ -20,7 +20,7 @@
     <connection></connection>
     <developerConnection></developerConnection>
     <url></url>
-    <tag></tag>
+    <tag>HEAD</tag>
   </scm>
   
   <build>
@@ -28,14 +28,331 @@
       <plugins>
         
         <!-- maven plugins par defaut () debut -->
-        <plugin></plugin>
-      
-      
-      
-      </plugins>
+        <plugin>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>1.4.1</version>
+          <inherited>true</inherited>
+          <configuration>
+            <ignoreCache>true</ignoreCache>
+            <rules>
+              <requireJavaVersion>
+                <version>[${java.version},]</version>
+              </requireJavaVersion>
+              <requireMavenVersion>
+                <version>[${maven.version},]</version>
+              </requireMavenVersion>
+              <banDuplicatePomDependencyVersions/>
+              <reactorModuleConvergence>
+                <message>The reactor is not valid !</message>
+                <ignoreModuleDependencies>false</ignoreModuleDependencies>
+              </reactorModuleConvergence>
+              <requireReleaseDeps>
+                <onlyWhenRelease>true</onlyWhenRelease>
+                <message>No Snapshots Allowed !</message>
+              </requireReleaseDeps>
+              <requirePluginVersions>
+                <banLatest>true</banLatest>
+                <banRelease>true</banRelease>
+                <banSnapshots>true</banSnapshots>
+                <phases>clean,deploy,site</phases>
+              </requirePluginVersions>
+              <requireSameVersions>
+                <dependencies>
+                  <dependency>org.springframework.boot</dependency>
+                </dependencies>
+              </requireSameVersions>  
+            </rules>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>2.5</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>2.6</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.5.1</version>
+          <configuration>
+            <source>${java.version}</source>
+            <target>${java.version}</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+          <configuration>
+            <skip>true</skip>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.0.1</version>
+          <executions>
+            <execution>
+              <id>attach-source</id>
+              <goals>
+                <goal>jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+          <configuration>
+            <archive>
+              <manifestEntries>
+                <Implementation-version>${project.version}</Implementation-version>
+              </manifestEntries>
+            </archive>
+          </configuration>
+        </plugin>
+        <plugin>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>2.5.3</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.7</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.3</version>
+        </plugin>
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.12.4</version>
+        </plugin>
+        <!-- maven plugin par defaut (fin) -->
+        
+        <!-- maven plugin divers (debut) -->
+        <plugin>
+          <groupId>org.sonarsource.scanner.maven</groupId>
+          <artifactId>sonar-maven-plugin</artifactId>
+          <version>3.6.1.1688</version>
+        </plugin>
+        <plugin>
+          <groupId>external.atlassian.jgitflow</groupId>
+          <artifactId>jgitflow-maven-plugin</artifactId>
+          <version>1.0-m5.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>buildnumber-maven-plugin</artifactId>
+          <version>1.4</version>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>build-helper-maven-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+        <!-- maven plugin divers (fin) -->
+        
+        <!-- plugins spring (debut) -->
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring.artifact.version}</version>
+        </plugin>
+        <!-- plugins spring (fin) -->
+        
+        <!-- Bean Validation API support -->
+        <plugin>
+          <groupId>javax.validation</groupId>
+          <artifactId>validation-api</artifactId>
+          <version>2.0.1.Final</version>
+        </plugin>
+        
+      </plugins>  
     </pluginManagement>
-  
-  
+    
+    <plugins>
+      <plugin>
+        <artifactId>maven-enforcer-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>enforcer</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
   </build>
+  
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring.artifact.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>3.0</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-configuration2</artifactId>
+        <version>2.7</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-beanutils</groupId>
+        <artifactId>commons-beanutils</artifactId>
+        <version>1.9.4</version>
+      </dependency>
+      <dependency>
+        <groupId>info.picocli</groupId>
+        <artifactId>picocli</artifactId>
+        <version>3.6.1</version>
+      </dependency>
+      <dependency>
+        <groupId>org.codehaus.janino</groupId>
+        <artifactId>janino</artifactId>
+        <version>3.0.6</version>
+      </dependency>
+      <dependency>
+        <groupId>commons-validator</groupId>
+        <artifactId>commons-validator</artifactId>
+        <version>1.7</version>
+      </dependency>
+      <dependency>
+        <groupId>org.reflections</groupId>
+        <artifactId>reflections</artifactId>
+        <version>0.9.12</version>
+      </dependency>
+      <dependency>
+        <groupId>org.zalando</groupId>
+        <artifactId>logbook-spring-boot-starter</artifactId>
+        <version>2.9.0</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  
+  <profiles>
+    <profile>
+      <id>sonar</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>buildnumber-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>prepare-build-parameters-for-sonar</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>create</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>setup-sonar-project-name</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>regex-property</goal>
+                </goals>
+                <configuration>
+                  <name>sonar.projectName</name>
+                  <value>${project.name} (${project.version}) - ${scmBranch}</value>
+                  <regex>__NOTHING_TO_REPLACE__</regex>
+                  <replacement/>
+                  <failIfNoMatch>false</failIfNoMatch>
+                </configuration>
+              </execution>
+              <execution>
+                <id>setup-sonar-project-key</id>
+                <phase>validate</phase>
+                <goals>
+                  <goal>regex-property</goal>
+                </goals>
+                <configuration>
+                  <name>sonar.projectKey</name>
+                  <value>${project.groupId}:${project.groupId}:${scmBranch}</value>
+                  <regex>/</regex>
+                  <replacement>:</replacement>
+                  <failIfNoMatch>false</failIfNoMatch>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    
+    <profile>
+      <id>upload.artifacts</id>
+      <distributionManagement>
+        <repository>
+          <name>Releases Repository</name>
+          <id>${webapi.repository.id}</id>
+          <url>${webapi.repository.url}</url>
+        </repository>
+        <snapshotRepository>
+          <name>Snapshots Repository</name>
+          <id>${webapi.repository.id}</id>
+          <url>${webapi.repository.url}</url>
+        </snapshotRepository>
+      </distributionManagement>
+    </profile>
+    
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-release-plugin</artifactId>
+            <configuration>
+              <tagNameFormat>v@{project.version}</tagNameFormat>
+              <releaseProfiles>release</releaseProfiles>
+              <autoVersionSubmodules>truse</autoVersionSubmodules>
+            </configuration>
+          </plugin>
+          <plugin>
+            <groupId>external.atlassian.jgitflow</groupId>
+            <artifactId>jgitflow-maven-plugin</artifactId>
+            <configuration>
+              <enableSshAgent>true</enableSshAgent>
+              <autoVersionSubmodules>true</autoVersionSubmodules>
+              <pushReleases>true</pushReleases>
+              <keepBranch>false</keepBranch>
+              <noTag>flase</noTag>
+              <noDeploy>true</noDeploy>
+              <consistentProjectVersions>true</consistentProjectVersions>
+              <allowSnapshots>true</allowSnapshots>
+              <username>${config.jgit.username}</username>
+              <password>${config.jgit.password}</password>
+              <flowInitContext>
+                <masterBranchName>master</masterBranchName>
+                <developBranchName>develop</developBranchName>
+                <versionTagPrefix>v</versionTagPrefix>
+              </flowInitContext>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
+  <modules>
+  	<module>gesparcbackend-core</module>
+  	<module>gesparcbackend-model</module>
+  	<module>gesparcbackend-app</module>
+  	<module>gesparcbackend-utils</module>
+  </modules>
 </project>
