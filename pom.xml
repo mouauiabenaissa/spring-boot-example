@@ -175,7 +175,7 @@
         <executions>
           <execution>
             <goals>
-              <goal>enforcer</goal>
+              <goal>enforce</goal>
             </goals>
           </execution>
         </executions>
