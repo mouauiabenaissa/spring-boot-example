@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!DOCTYPE xml>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <parent>
+    <groupId>com.tfm.webapi.gesparcbackend</groupId>
+    <artifactId>gesparcbackend-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  
+  <artifactId>gesparcbackend-app</artifactId>
+  <name>gesparcbackend-app</name>
+  
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <dependencies>
+    <dependency>
+      <groupId>com.tfm.webapi.gesparcbackend</groupId>
+      <artifactId>gesparcbackend-core</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <scope>provided</scope>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>info.picocli</groupId>
+      <artifactId>picocli</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.codehaus.janino</groupId>
+      <artifactId>janino</artifactId>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+        <!-- plugins spring (debut) -->
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <mainClass>com.tfm.webapi.gesparcbackend.app.GesparcBackend</mainClass>
+          <excludeDevtools>true</excludeDevtools>
+          <executable>true</executable>
+        </configuration>
+        
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <!-- plugins spring (fin) -->  
+    </plugins>
+  </build>
+  
+</project>
