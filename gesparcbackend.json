@@ -1,0 +1,15 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "GesparcBackend API",
+        "description": "Sert à automatiser la création des véhicules pour les plateformes APIGateway",
+        "contact": {
+            "name": "DMP_PCL_STR_EGA",
+            "email": "DMP_PCL_STR_EGA@tfm-it.tn"      
+        },
+        "version": "1.0.0"
+    }
+     
+     
+
+}
