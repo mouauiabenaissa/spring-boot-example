@@ -36,7 +36,7 @@
             <ignoreCache>true</ignoreCache>
             <rules>
               <requireJavaVersion>
-                <version>[${java.version},]</version>
+                <version>[${java.version},)</version>
               </requireJavaVersion>
               <requireMavenVersion>
                 <version>[${maven.version},]</version>
