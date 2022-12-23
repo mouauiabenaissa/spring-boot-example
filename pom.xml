@@ -320,7 +320,7 @@
             <configuration>
               <tagNameFormat>v@{project.version}</tagNameFormat>
               <releaseProfiles>release</releaseProfiles>
-              <autoVersionSubmodules>truse</autoVersionSubmodules>
+              <autoVersionSubmodules>true</autoVersionSubmodules>
             </configuration>
           </plugin>
           <plugin>
